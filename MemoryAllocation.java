@@ -1,4 +1,5 @@
-import java.util.*;
+import java.util.Arrays;
+import java.util.Scanner;
 
 public class MemoryAllocation {
 
@@ -8,9 +9,7 @@ public class MemoryAllocation {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        System.out.println("============================================================");
-        System.out.println("       SIMULASI ALGORITMA ALOKASI MEMORI");
-        System.out.println("============================================================");
+        System.out.println("--- SIMULASI ALGORITMA ALOKASI MEMORI (FIRST-FIT, BEST-FIT, WORST-FIT ---");
 
         // Input blok memori
         System.out.print("\nMasukkan jumlah blok memori : ");
@@ -18,7 +17,7 @@ public class MemoryAllocation {
         blockSizes = new int[numBlocks];
         System.out.println("Masukkan ukuran tiap blok memori:");
         for (int i = 0; i < numBlocks; i++) {
-            System.out.print("  Blok " + (i + 1) + " : ");
+            System.out.print("Blok " + (i + 1) + " : ");
             blockSizes[i] = sc.nextInt();
         }
 
@@ -28,7 +27,7 @@ public class MemoryAllocation {
         processSizes = new int[numProcesses];
         System.out.println("Masukkan ukuran tiap proses:");
         for (int i = 0; i < numProcesses; i++) {
-            System.out.print("  Proses P" + (i + 1) + " : ");
+            System.out.print("Proses P" + (i + 1) + " : ");
             processSizes[i] = sc.nextInt();
         }
 
@@ -43,16 +42,13 @@ public class MemoryAllocation {
         worstFit();
     }
 
-    // ===================== FIRST FIT =====================
     static void firstFit() {
         int[] blocks = blockSizes.clone();
         boolean[] used = new boolean[blocks.length];
         int[] alloc = new int[processSizes.length];
         Arrays.fill(alloc, -1);
 
-        System.out.println("\n============================================================");
-        System.out.println("  FIRST FIT");
-        System.out.println("============================================================");
+        System.out.println("\n--- FIRST FIT ---");
 
         for (int i = 0; i < processSizes.length; i++) {
             for (int j = 0; j < blocks.length; j++) {
@@ -68,16 +64,13 @@ public class MemoryAllocation {
         printResult(alloc, blocks, used);
     }
 
-    // ===================== BEST FIT =====================
     static void bestFit() {
         int[] blocks = blockSizes.clone();
         boolean[] used = new boolean[blocks.length];
         int[] alloc = new int[processSizes.length];
         Arrays.fill(alloc, -1);
 
-        System.out.println("\n============================================================");
-        System.out.println("  BEST FIT");
-        System.out.println("============================================================");
+        System.out.println("\n--- BEST FIT ---");
 
         for (int i = 0; i < processSizes.length; i++) {
             int bestIdx = -1;
@@ -98,16 +91,13 @@ public class MemoryAllocation {
         printResult(alloc, blocks, used);
     }
 
-    // ===================== WORST FIT =====================
     static void worstFit() {
         int[] blocks = blockSizes.clone();
         boolean[] used = new boolean[blocks.length];
         int[] alloc = new int[processSizes.length];
         Arrays.fill(alloc, -1);
 
-        System.out.println("\n============================================================");
-        System.out.println("  WORST FIT");
-        System.out.println("============================================================");
+        System.out.println("\n--- WORST FIT ---");
 
         for (int i = 0; i < processSizes.length; i++) {
             int worstIdx = -1;
@@ -130,8 +120,7 @@ public class MemoryAllocation {
 
     // ===================== PRINT HASIL =====================
     static void printResult(int[] alloc, int[] blocks, boolean[] used) {
-        System.out.printf("%-12s %-15s %-15s %-10s%n",
-                "Proses", "Ukuran Proses", "Blok Dialokasi", "Status");
+        System.out.printf("%-12s %-15s %-15s %-10s%n","Proses", "Ukuran Proses", "Blok Dialokasi", "Status");
         System.out.println("------------------------------------------------------------");
 
         for (int i = 0; i < processSizes.length; i++) {
@@ -149,8 +138,7 @@ public class MemoryAllocation {
         System.out.println("------------------------------------------");
         for (int i = 0; i < blocks.length; i++) {
             String status = used[i] ? "TERPAKAI" : "KOSONG";
-            System.out.printf("%-10s %-15d %-15d %-10s%n",
-                    "Blok " + (i + 1), blockSizes[i], blocks[i], status);
+            System.out.printf("%-10s %-15d %-15d %-10s%n", "Blok " + (i + 1), blockSizes[i], blocks[i], status);
         }
     }
 }
